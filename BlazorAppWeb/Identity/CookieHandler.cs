@@ -2,20 +2,17 @@
 
 namespace BlazorAppWeb.Identity
 {
-    /// <summary>
-    /// Handler to ensure cookie credentials are automatically sent over with each request.
-    /// </summary>
     public class CookieHandler : DelegatingHandler
     {
         /// <summary>
-        /// Main method to override for the handler.
+        /// クッキーを含む認証情報がリクエストに自動的に追加されるように設定
         /// </summary>
-        /// <param name="request">The original request.</param>
-        /// <param name="cancellationToken">The token to handle cancellations.</param>
-        /// <returns>The <see cref="HttpResponseMessage"/>.</returns>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            // include cookies!
+            // クッキーを含める
             request.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
             request.Headers.Add("X-Requested-With", ["XMLHttpRequest"]);
 
